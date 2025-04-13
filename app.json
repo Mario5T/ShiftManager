@@ -3,6 +3,11 @@
     "name": "Shifts Manager",
     "slug": "shifts-manager",
     "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -24,13 +29,13 @@
       }
     },
     "web": {
+      "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "86455a35-8adc-4abc-bfd4-d39afc855090"
+        "projectId": "c2023673-7314-4582-83ae-d9e9d5b98195"
       }
-    },
-    "owner": "aditya5t"
+    }
   }
 }
