@@ -1,0 +1,125 @@
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { ShiftContext } from '../context/ShiftContext';
+
+const AddEmployeeScreen = ({ navigation }) => {
+  const { addEmployee } = useContext(ShiftContext);
+  const [name, setName] = useState('');
+  const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [notes, setNotes] = useState('');
+
+  const handleSave = () => {
+    if (!name.trim()) {
+      alert('Please enter a name');
+      return;
+    }
+    
+    const newEmployee = {
+      name,
+      role,
+      email,
+      phone,
+      notes,
+    };
+    
+    addEmployee(newEmployee);
+    navigation.goBack();
+  };
+
+  return (
+    <ScrollView style={styles.container}>
+      <Text style={styles.label}>Name *</Text>
+      <TextInput
+        style={styles.input}
+        value={name}
+        onChangeText={setName}
+        placeholder="Enter employee name"
+      />
+
+      <Text style={styles.label}>Role</Text>
+      <TextInput
+        style={styles.input}
+        value={role}
+        onChangeText={setRole}
+        placeholder="Enter employee role"
+      />
+
+      <Text style={styles.label}>Email</Text>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail}
+        placeholder="Enter email address"
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+
+      <Text style={styles.label}>Phone</Text>
+      <TextInput
+        style={styles.input}
+        value={phone}
+        onChangeText={setPhone}
+        placeholder="Enter phone number"
+        keyboardType="phone-pad"
+      />
+
+      <Text style={styles.label}>Notes</Text>
+      <TextInput
+        style={[styles.input, styles.notesInput]}
+        value={notes}
+        onChangeText={setNotes}
+        placeholder="Enter any additional notes"
+        multiline
+      />
+
+      <TouchableOpacity 
+        style={styles.saveButton}
+        onPress={handleSave}
+      >
+        <Text style={styles.saveButtonText}>Save Employee</Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#f5f5f5',
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 12,
+    marginBottom: 8,
+  },
+  input: {
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  notesInput: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  saveButton: {
+    backgroundColor: '#007AFF',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 24,
+    marginBottom: 40,
+  },
+  saveButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+export default AddEmployeeScreen;
